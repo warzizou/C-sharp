@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+public class Joueur
+{
+    // Attributs
+    public string Nom { get; private set; }
+    public int Score { get; private set; }
+    private List<string> motsTrouves;
+
+    // Constructeur
+    public Joueur(string nom)
+    {
+        if (nom == null || nom.Trim() == "")
+        {
+            Console.WriteLine("Erreur : Le nom ne peut pas être vide.");
+            return;
+        }
+
+        Nom = nom;
+        Score = 0;
+        motsTrouves = new List<string>();
+    }
+
+    // Méthode pour vérifier si un mot est dans la liste des mots trouvés
+    public bool Contain(string mot)
+    {
+        for (int i = 0; i < motsTrouves.Count; i++)
+        {
+            if (motsTrouves[i] == mot)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Méthode pour ajouter un mot à la liste des mots trouvés
+    public void Add_Mot(string mot)
+    {
+        if (!Contain(mot))
+        {
+            motsTrouves.Add(mot);
+            // Logique pour mettre à jour le score peut être ajoutée ici
+        }
+    }
+}
+
+// Utilisation de la classe Joueur
+public class Program
+{
+    public static void Main()
+    {
+        Joueur joueur1 = new Joueur("Alice");
+        joueur1.Add_Mot("Chat");
+        joueur1.Add_Mot("Chien");
+        
+        Console.WriteLine("Le joueur " + joueur1.Nom + " a trouvé les mots suivants :");
+        foreach (string mot in joueur1.motsTrouves) {
+            Console.WriteLine(mot);
+        }
+    }
+}
